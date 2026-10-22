@@ -1,0 +1,17 @@
+{
+  "name": "Cinema e Muito +",
+  "description": "Site de variedades, cinema, teatro, tv e entretenimento",
+  "url": "https://www.cinemaemuitomais.com",
+  "media_base": "https://media.cinemaemuitomais.com/wp-content/uploads",
+  "language": "pt-BR",
+  "timezone": "America/Sao_Paulo",
+  "date_format": "d/m/Y",
+  "permalink_structure": "/%postname%/",
+  "posts_per_page": 50,
+  "page_on_front": 39,
+  "page_for_posts": 0,
+  "adsense": "ca-pub-6725457701341059",
+  "ga4": "G-7JK7M6939D",
+  "gtm": "GTM-WTDZX43",
+  "generated_at": "2026-10-20"
+}

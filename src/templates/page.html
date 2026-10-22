@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% from "partials/share.html" import share with context %}
+{% block content %}
+<article class="single single--page">
+  <div class="wrap single__grid">
+    <div class="single__main">
+      <nav class="breadcrumb" aria-label="Você está aqui">
+        {% for b in breadcrumb %}
+          {% if not loop.last %}
+          <a href="{{ b.url }}">{{ b.label }}</a><span aria-hidden="true">/</span>
+          {% else %}
+          <span aria-current="page">{{ b.label }}</span>
+          {% endif %}
+        {% endfor %}
+      </nav>
+
+      <header class="entry-header">
+        <span class="kicker">Página</span>
+        <h1 class="entry-title">{{ page.title }}</h1>
+        {% if page.excerpt %}<p class="entry-dek">{{ page.excerpt }}</p>{% endif %}
+        <div class="entry-meta">
+          <time datetime="{{ page.date_iso }}">Atualizado em {{ page.date_br }}</time>
+        </div>
+        {{ share(page, site) }}
+      </header>
+
+      {% if page.image %}
+      <figure class="entry-image">
+        <picture>
+          {% if page.image_srcset %}<source type="image/webp" srcset="{{ page.image_srcset }}" sizes="(max-width: 900px) 100vw, 800px">{% endif %}
+          <img src="{{ page.image }}" alt="{{ page.image_alt }}" width="{{ page.image_w or 1200 }}" height="{{ page.image_h or 675 }}" fetchpriority="high" decoding="async">
+        </picture>
+        {% if page.image_caption %}<figcaption>{{ page.image_caption }}</figcaption>{% endif %}
+      </figure>
+      {% endif %}
+
+      <div class="entry-content">
+        {{ content_html|safe }}
+      </div>
+    </div>
+
+    <aside class="single__aside" aria-label="Conteúdo complementar">
+      <div class="aside-block">
+        <span class="kicker">Programação</span>
+        <h2>Salas de cinema</h2>
+        <ul class="aside-links">
+          {% for l in programacao_links[:9] %}
+          <li><a href="{{ l.url }}">{{ l.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="aside-block aside-block--note">
+        <h2>Anuncie</h2>
+        <p>Mídia kit e formatos para marcas que falam com quem ama cultura pop.</p>
+        <a class="section-head__link" href="/contato/">Falar com a redação</a>
+      </div>
+    </aside>
+  </div>
+</article>
+{% endblock %}

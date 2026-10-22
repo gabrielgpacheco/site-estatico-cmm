@@ -1,0 +1,40 @@
+# Backups e dumps (nunca commitar)
+*.sql
+*.sql.gz
+*.tar
+*.tar.gz
+*.zip
+*.7z
+*.gz
+
+# Dados privados / analises
+dados/brutos/
+dados/analise-2026/
+dados/credenciais/
+dados/midia/
+dados/preview-*/
+wp-config.php
+.env
+.env.*
+
+# Saida gerada
+site/
+_site/
+dist/
+node_modules/
+.cache/
+.pagefind/
+
+# Documentos privados
+DEPLOY-LOCAL.md
+*.private.md
+
+# Sistema
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Relatorios e QA locais (nao vao para o repositorio)
+dados/
+__pycache__/
+*.pyc

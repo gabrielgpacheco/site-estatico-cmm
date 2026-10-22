@@ -1,0 +1,13 @@
+{% macro pagination(archive) %}
+{% if archive.pages > 1 %}
+<nav class="pagination" aria-label="Paginação">
+  {% if archive.prev_url %}
+  <a class="pagination__link" href="{{ archive.prev_url }}" rel="prev">← Anterior</a>
+  {% else %}<span class="pagination__spacer"></span>{% endif %}
+  <span class="pagination__status">Página {{ archive.page }} de {{ archive.pages }}</span>
+  {% if archive.next_url %}
+  <a class="pagination__link" href="{{ archive.next_url }}" rel="next">Próxima →</a>
+  {% else %}<span class="pagination__spacer"></span>{% endif %}
+</nav>
+{% endif %}
+{% endmacro %}

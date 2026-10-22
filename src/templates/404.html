@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wrap error-page">
+  <p class="error-code" aria-hidden="true">404</p>
+  <span class="kicker">Fora de cartaz</span>
+  <h1>Esta página não existe ou mudou de endereço.</h1>
+  <p>O conteúdo pode ter sido removido ou o link pode estar incorreto. Tente buscar ou voltar para a home.</p>
+  <form class="search-page__form" action="/busca/" method="get" role="search">
+    <label class="visually-hidden" for="q404">Buscar no site</label>
+    <input id="q404" type="search" name="q" placeholder="Buscar no site…" autocomplete="off">
+    <button type="submit">Buscar</button>
+  </form>
+  <div class="pills">
+    <a href="/">Início</a>
+    <a href="/programacao/cinema/">Salas de Cinema</a>
+    <a href="/category/cultura/">Cultura</a>
+    <a href="/category/teatro-4/">Teatro</a>
+    <a href="/tag/filme/">Filmes</a>
+  </div>
+</div>
+{% endblock %}

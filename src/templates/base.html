@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ seo_title }}</title>
+{% if seo_description %}<meta name="description" content="{{ seo_description }}">{% endif %}
+<link rel="canonical" href="{{ canonical }}">
+{% if noindex %}<meta name="robots" content="noindex,follow">{% else %}<meta name="robots" content="index,follow,max-image-preview:large">{% endif %}
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:title" content="{{ seo_title }}">
+{% if seo_description %}<meta property="og:description" content="{{ seo_description }}">{% endif %}
+<meta property="og:url" content="{{ canonical }}">
+{% if og_image %}
+<meta property="og:image" content="{{ og_image }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ og_image }}">
+{% else %}
+<meta name="twitter:card" content="summary">
+{% endif %}
+<meta name="twitter:title" content="{{ seo_title }}">
+{% if seo_description %}<meta name="twitter:description" content="{{ seo_description }}">{% endif %}
+<meta name="theme-color" content="#d22b1f">
+{% if site.verification and site.verification.google %}<meta name="google-site-verification" content="{{ site.verification.google }}">{% endif %}
+{% if site.verification and site.verification.bing %}<meta name="msvalidate.01" content="{{ site.verification.bing }}">{% endif %}
+{% if site.verification and site.verification.yandex %}<meta name="yandex-verification" content="{{ site.verification.yandex }}">{% endif %}
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="manifest" href="/assets/site.webmanifest">
+<link rel="sitemap" type="application/xml" href="/sitemap_index.xml">
+<link rel="preload" href="/assets/fonts/work-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/fira-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css">
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted'});
+window.gtag=gtag;
+document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'){t.classList.add('is-broken');var f=t.closest('.entry-image');if(f){f.hidden=true;}}},true);
+</script>
+{% for block in jsonld %}
+<script type="application/ld+json">{{ block|tojson }}</script>
+{% endfor %}
+{% block head %}{% endblock %}
+</head>
+<body class="{{ body_class }}" data-ga4="{{ site.ga4 }}" data-adsense="{{ site.adsense }}">
+<a class="skip-link" href="#main">Ir para o conteúdo</a>
+{% include "partials/header.html" %}
+<main id="main" class="site-main"{% if indexable %} data-pagefind-body{% elif pagefind_ignore %} data-pagefind-ignore{% endif %}>
+{% block content %}{% endblock %}
+</main>
+{% include "partials/footer.html" %}
+{% include "partials/consent.html" %}
+<script src="/assets/js/main.js" defer></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

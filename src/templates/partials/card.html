@@ -1,0 +1,20 @@
+{% macro card(p, show_excerpt=false, eager=false) %}
+<article class="card">
+  <a class="card__media" href="{{ p.url }}" tabindex="-1" aria-hidden="true">
+    {% if p.image %}
+    <picture>
+      {% if p.image_srcset %}<source type="image/webp" srcset="{{ p.image_srcset }}" sizes="(max-width: 700px) 100vw, 360px">{% endif %}
+      <img src="{{ p.image }}" alt="{{ p.image_alt }}" width="{{ p.image_w or 768 }}" height="{{ p.image_h or 512 }}" loading="{{ 'eager' if eager else 'lazy' }}" decoding="async">
+    </picture>
+    {% else %}
+    <span class="card__placeholder"></span>
+    {% endif %}
+  </a>
+  <div class="card__body">
+    <a class="kicker" href="{{ p.category_url }}">{{ p.category_name }}</a>
+    <h3 class="card__title"><a href="{{ p.url }}">{{ p.title }}</a></h3>
+    {% if show_excerpt and p.excerpt %}<p class="card__excerpt">{{ p.excerpt }}</p>{% endif %}
+    <p class="card__meta"><time datetime="{{ p.date_iso }}">{{ p.date_br }}</time><span aria-hidden="true">·</span><span>{{ p.reading_time }} min</span></p>
+  </div>
+</article>
+{% endmacro %}

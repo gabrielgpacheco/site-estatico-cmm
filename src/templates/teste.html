@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wrap page-narrow">
+  <span class="kicker">Fase 3</span>
+  <h1>Amostra do site estático</h1>
+  <p>Esta página existe apenas no build de teste. {{ sample_count }} posts foram gerados para validar home, post, página, tag, categoria, autor, busca e 404.</p>
+
+  <div class="table-wrap">
+    <table class="test-table">
+      <thead><tr><th>Página</th><th>URL</th><th>O que verificar</th></tr></thead>
+      <tbody>
+      {% for label, url, note in links %}
+        <tr><td><a href="{{ url }}">{{ label }}</a></td><td><code>{{ url }}</code></td><td>{{ note }}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Checklist de aprovação</h2>
+  <ul class="checklist">
+    <li>Home, post, página de cinema, tag e 404 renderizam corretamente.</li>
+    <li>Layout mobile funcional (menu, busca, cards e conteúdo).</li>
+    <li>Nenhum script de terceiros antes do consentimento.</li>
+    <li>Banner de consentimento abre, aceita e recusa; preferências reabrem pelo rodapé.</li>
+    <li>Fachada de YouTube só carrega o iframe após o clique.</li>
+    <li>Imagens usam a base de mídia configurada e carregam com lazy loading.</li>
+    <li>Tipografia Fira Sans/Work Sans servida localmente.</li>
+  </ul>
+
+  <p class="test-hint">Servidor local: <code>python -m http.server 8000 --directory site</code> e abra <code>http://localhost:8000/teste.html</code>.</p>
+</div>
+{% endblock %}

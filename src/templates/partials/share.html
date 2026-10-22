@@ -1,0 +1,11 @@
+{% macro share(post, site, label="Compartilhar") %}
+{% set share_url = site.url + post.url %}
+{% set share_text = post.title %}
+<div class="share" aria-label="{{ label }}">
+  <span class="share__label">{{ label }}</span>
+  <a href="https://wa.me/?text={{ (share_text ~ ' ' ~ share_url)|urlencode }}" target="_blank" rel="noopener nofollow">WhatsApp</a>
+  <a href="https://twitter.com/intent/tweet?url={{ share_url|urlencode }}&text={{ share_text|urlencode }}" target="_blank" rel="noopener nofollow">X</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url|urlencode }}" target="_blank" rel="noopener nofollow">Facebook</a>
+  <button type="button" class="share__copy" data-copy-url="{{ share_url }}">Copiar link</button>
+</div>
+{% endmacro %}

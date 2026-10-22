@@ -1,0 +1,49 @@
+<header class="site-header">
+  <div class="topbar">
+    <div class="wrap topbar__inner">
+      <p class="topbar__tagline">{{ site.description }}</p>
+      <nav class="topbar__links" aria-label="Links institucionais">
+        <a href="/quemsomos/">Quem somos</a>
+        <a href="/contato/">Anuncie</a>
+        <a href="/politica-de-cookies-br/">Cookies</a>
+      </nav>
+    </div>
+  </div>
+  <div class="wrap masthead">
+    <a class="brand" href="/" aria-label="Cinema e Muito + — página inicial">
+      <span class="brand__name">Cinema <em>e</em> Muito</span><span class="brand__plus" aria-hidden="true">+</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu">
+      <span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span><span class="nav-toggle__bar"></span>
+    </button>
+    <nav class="nav" id="nav" aria-label="Menu principal">
+      {% for item in nav %}
+        {% if item.children %}
+        <details class="nav__drop">
+          <summary class="nav__link{% if current_url.startswith(item.url) %} is-active{% endif %}">{{ item.label }}</summary>
+          <div class="nav__sub">
+            <a href="{{ item.url }}">Ver tudo em {{ item.label }}</a>
+            {% for child in item.children %}
+            <a href="{{ child.url }}">{{ child.label }}</a>
+            {% endfor %}
+          </div>
+        </details>
+        {% else %}
+        <a class="nav__link{% if current_url == item.url %} is-active{% endif %}" href="{{ item.url }}">{{ item.label }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+    <button class="search-toggle" type="button" aria-expanded="false" aria-controls="search-bar" aria-label="Abrir busca">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Buscar</span>
+    </button>
+  </div>
+  <form class="search-bar" id="search-bar" action="/busca/" method="get" role="search" hidden>
+    <div class="wrap search-bar__inner">
+      <label class="visually-hidden" for="q-top">Buscar no site</label>
+      <input id="q-top" type="search" name="q" placeholder="Busque por filmes, séries, teatro, livros…" autocomplete="off">
+      <button type="submit">Buscar</button>
+      <button type="button" class="search-bar__close" aria-label="Fechar busca">×</button>
+    </div>
+  </form>
+</header>

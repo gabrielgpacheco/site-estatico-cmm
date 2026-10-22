@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% from "partials/card.html" import card %}
+{% block content %}
+<section class="hero">
+  <div class="wrap hero__grid">
+    <article class="hero__main">
+      <a class="hero__media" href="{{ hero.url }}">
+        {% if hero.image %}
+        <picture>
+          {% if hero.image_srcset %}<source type="image/webp" srcset="{{ hero.image_srcset }}" sizes="(max-width: 900px) 100vw, 720px">{% endif %}
+          <img src="{{ hero.image }}" alt="{{ hero.image_alt }}" width="{{ hero.image_w or 1200 }}" height="{{ hero.image_h or 675 }}" fetchpriority="high" decoding="async">
+        </picture>
+        {% endif %}
+        <span class="hero__shade" aria-hidden="true"></span>
+        <span class="hero__content">
+          <span class="kicker kicker--light">{{ hero.category_name }}</span>
+          <h1 class="hero__title">{{ hero.title }}</h1>
+        </span>
+      </a>
+      <p class="hero__excerpt">{{ hero.excerpt }}</p>
+      <p class="hero__meta"><time datetime="{{ hero.date_iso }}">{{ hero.date_br }}</time><span aria-hidden="true">·</span><span>{{ hero.reading_time }} min de leitura</span></p>
+    </article>
+    <aside class="hero__side" aria-label="Em destaque">
+      <h2 class="section-label">Em destaque</h2>
+      {% for p in secondary %}
+      <a class="mini" href="{{ p.url }}">
+        <span class="mini__text">
+          <span class="mini__kicker">{{ p.category_name }}</span>
+          <span class="mini__title">{{ p.title }}</span>
+          <span class="mini__meta">{{ p.date_br }}</span>
+        </span>
+        {% if p.image %}
+        <picture>
+          {% if p.image_srcset %}<source type="image/webp" srcset="{{ p.image_srcset }}" sizes="(max-width: 700px) 30vw, 220px">{% endif %}
+          <img src="{{ p.image }}" alt="" width="{{ p.image_w or 768 }}" height="{{ p.image_h or 512 }}" loading="lazy" decoding="async">
+        </picture>
+        {% endif %}
+      </a>
+      {% endfor %}
+    </aside>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Últimas</h2>
+      <a class="section-head__link" href="/category/cultura/">Ver Cultura</a>
+    </div>
+    <div class="grid grid--3">
+      {% for p in latest %}{{ card(p, true) }}{% endfor %}
+    </div>
+  </div>
+</section>
+
+{% for s in sections %}
+<section class="section{% if loop.index is even %} section--soft{% endif %}">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>{{ s.title }}</h2>
+      <a class="section-head__link" href="{{ s.url }}">Ver tudo</a>
+    </div>
+    <div class="grid grid--4">
+      {% for p in s.posts %}{{ card(p) }}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<section class="section">
+  <div class="wrap">
+    <div class="programacao">
+      <div class="programacao__intro">
+        <span class="kicker">Programação</span>
+        <h2>Cinema perto de você</h2>
+        <p>Salas, horários e endereços organizados por estado. Escolha onde você está e veja o que está em cartaz.</p>
+        <a class="btn btn--primary" href="/programacao/cinema/">Ver Salas de Cinema</a>
+      </div>
+      <div class="pills pills--programacao">
+        {% for l in programacao_links %}<a href="{{ l.url }}">{{ l.label }}</a>{% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Explore por assunto</h2>
+      <span class="section-head__note">Tags mais usadas</span>
+    </div>
+    <div class="tag-cloud">
+      {% for t in top_tags %}
+      <a href="{{ t.url }}">{{ t.name }} <span>{{ t.count }}</span></a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

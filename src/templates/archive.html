@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% from "partials/card.html" import card %}
+{% from "partials/pagination.html" import pagination %}
+{% block content %}
+<div class="wrap archive">
+  <nav class="breadcrumb" aria-label="Você está aqui">
+    <a href="/">Início</a><span aria-hidden="true">/</span>
+    <span>{{ archive.kicker }}</span><span aria-hidden="true">/</span>
+    <span aria-current="page">{{ archive.title }}</span>
+  </nav>
+
+  <header class="archive-header">
+    <span class="kicker">{{ archive.kicker }}</span>
+    <h1>{{ archive.title }}</h1>
+    <p>{{ archive.description }}</p>
+    <p class="archive-count">{{ archive.count }} conteúdo{% if archive.count != 1 %}s{% endif %}{% if archive.pages > 1 %} · página {{ archive.page }} de {{ archive.pages }}{% endif %}</p>
+  </header>
+
+  {% if archive.posts %}
+  <div class="grid grid--3">
+    {% for p in archive.posts %}{{ card(p, true) }}{% endfor %}
+  </div>
+  {{ pagination(archive) }}
+  {% else %}
+  <p class="empty-state">Nenhum conteúdo publicado com este recorte por enquanto.</p>
+  {{ pagination(archive) }}
+  {% endif %}
+</div>
+{% endblock %}

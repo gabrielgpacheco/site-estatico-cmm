@@ -1,0 +1,52 @@
+[
+  {
+    "id": 2,
+    "nicename": "gabriel-pacheco",
+    "name": "Gabriel Pacheco",
+    "url": "/author/gabriel-pacheco/",
+    "description": "Influenciador digital, consultor de Cinema, TV e Web, crítico de cinema, editor de vídeos e revisor de textos.",
+    "posts": 104,
+    "in_sitemap": true,
+    "pages": 3
+  },
+  {
+    "id": 3,
+    "nicename": "clarissa-c-cavalcante",
+    "name": "Clarissa Cavalcante",
+    "url": "/author/clarissa-c-cavalcante/",
+    "description": "Tem 28 anos, é jornalista formada pela UFF e editora-chefe do site. Trabalha com produção de conteúdo para web desde 2012. Apaixonada por cinema, teatro e literatura, escreve críticas sobre os principais eventos culturais do Rio de Janeiro.",
+    "posts": 4414,
+    "in_sitemap": true,
+    "pages": 89
+  },
+  {
+    "id": 6,
+    "nicename": "moni",
+    "name": "Moni Oliveira",
+    "url": "/author/moni/",
+    "description": "Aventureira no mundo do cinema e da música. Fã de boas conversas e adepta da vida boêmia. Feminista e escorpiana. Quer trocar ideia? Follow me @Moniiquee",
+    "posts": 15,
+    "in_sitemap": true,
+    "pages": 1
+  },
+  {
+    "id": 7,
+    "nicename": "bia-medeiros",
+    "name": "Bia Medeiros",
+    "url": "/author/bia-medeiros/",
+    "description": "",
+    "posts": 30,
+    "in_sitemap": true,
+    "pages": 1
+  },
+  {
+    "id": 8,
+    "nicename": "luisa",
+    "name": "Luisa Antonitsch",
+    "url": "/author/luisa/",
+    "description": "",
+    "posts": 33,
+    "in_sitemap": true,
+    "pages": 1
+  }
+]

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wrap page-narrow">
+  <nav class="breadcrumb" aria-label="Você está aqui">
+    <a href="/">Início</a><span aria-hidden="true">/</span>
+    <span aria-current="page">Busca</span>
+  </nav>
+  <header class="archive-header">
+    <span class="kicker">Busca</span>
+    <h1>O que você procura?</h1>
+    <p>Filmes, séries, teatro, livros, entrevistas e colunas. Digite uma palavra-chave.</p>
+  </header>
+  <form class="search-page__form" action="/busca/" method="get" role="search">
+    <label class="visually-hidden" for="q">Buscar no site</label>
+    <input id="q" type="search" name="q" placeholder="Ex.: Tarantino, Netflix, teatro…" autocomplete="off">
+    <button type="submit">Buscar</button>
+  </form>
+  <div id="search" class="pagefind-ui" aria-live="polite"></div>
+  <noscript><p class="empty-state">Ative o JavaScript para usar a busca.</p></noscript>
+</div>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% from "partials/card.html" import card %}
+{% from "partials/share.html" import share with context %}
+{% block content %}
+<article class="single">
+  <div class="wrap single__grid">
+    <div class="single__main">
+      <nav class="breadcrumb" aria-label="Você está aqui">
+        {% for b in breadcrumb %}
+          {% if not loop.last %}
+          <a href="{{ b.url }}">{{ b.label }}</a><span aria-hidden="true">/</span>
+          {% else %}
+          <span aria-current="page">{{ b.label }}</span>
+          {% endif %}
+        {% endfor %}
+      </nav>
+
+      <header class="entry-header">
+        <span class="kicker">{{ post.category_name }}</span>
+        <h1 class="entry-title">{{ post.title }}</h1>
+        {% if post.excerpt %}<p class="entry-dek">{{ post.excerpt }}</p>{% endif %}
+        <div class="entry-meta">
+          <a class="byline" href="{{ post.author_url }}">{{ post.author_name }}</a>
+          <time datetime="{{ post.date_iso }}">{{ post.date_br }}</time>
+          <span>{{ post.reading_time }} min de leitura</span>
+        </div>
+        {{ share(post, site) }}
+      </header>
+
+      {% if post.image %}
+      <figure class="entry-image">
+        <picture>
+          {% if post.image_srcset %}<source type="image/webp" srcset="{{ post.image_srcset }}" sizes="(max-width: 900px) 100vw, 800px">{% endif %}
+          <img src="{{ post.image }}" alt="{{ post.image_alt }}" width="{{ post.image_w or 1200 }}" height="{{ post.image_h or 675 }}" fetchpriority="high" decoding="async">
+        </picture>
+        {% if post.image_caption %}<figcaption>{{ post.image_caption }}</figcaption>{% endif %}
+      </figure>
+      {% endif %}
+
+      <div class="entry-content">
+        {{ content_html|safe }}
+      </div>
+
+      <footer class="entry-footer">
+        {% if tags %}
+        <div class="entry-tags" aria-label="Tags do post">
+          {% for t in tags %}<a href="{{ t.url }}">{{ t.name }}</a>{% endfor %}
+        </div>
+        {% endif %}
+        {{ share(post, site, "Compartilhe") }}
+      </footer>
+
+      {% if author %}
+      <section class="author-box" aria-label="Sobre o autor">
+        <div class="author-box__avatar" aria-hidden="true">{{ author.name[0] }}</div>
+        <div>
+          <h2>{{ author.name }}</h2>
+          {% if author.description %}<p>{{ author.description }}</p>{% endif %}
+          <a class="section-head__link" href="{{ author.url }}">Ver todos os conteúdos</a>
+        </div>
+      </section>
+      {% endif %}
+
+      <nav class="post-nav" aria-label="Navegação entre posts">
+        {% if newer %}
+        <a class="post-nav__item" href="{{ newer.url }}">
+          <span>Mais recente</span>
+          <strong>{{ newer.title }}</strong>
+        </a>
+        {% endif %}
+        {% if older %}
+        <a class="post-nav__item post-nav__item--next" href="{{ older.url }}">
+          <span>Anterior</span>
+          <strong>{{ older.title }}</strong>
+        </a>
+        {% endif %}
+      </nav>
+
+      {% if related %}
+      <section class="related">
+        <div class="section-head"><h2>Leia também</h2></div>
+        <div class="grid grid--3">
+          {% for p in related %}{{ card(p) }}{% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      <section class="comments" id="comentarios">
+        <h2>Comentários{% if post.comments_count %} ({{ post.comments_count }}){% endif %}</h2>
+        {% for c in comments %}
+        <article class="comment" id="comment-{{ c.reply_to }}-{{ loop.index }}">
+          <header class="comment__head">
+            <strong>{{ c.author }}</strong>
+            <time datetime="{{ c.date_iso }}">{{ c.date_br }}</time>
+          </header>
+          <div class="comment__body">{{ c.content|safe }}</div>
+        </article>
+        {% endfor %}
+        <p class="comments__closed">Os comentários foram preservados, mas estão encerrados nesta versão estática do site.</p>
+      </section>
+    </div>
+
+    <aside class="single__aside" aria-label="Conteúdo complementar">
+      <div class="aside-block">
+        <span class="kicker">Sobre</span>
+        <h2>{{ site.name }}</h2>
+        <p>{{ site.description }}. No ar desde 2008.</p>
+        <a class="section-head__link" href="/quemsomos/">Conheça o site</a>
+      </div>
+      {% if sidebar_posts %}
+      <div class="aside-block">
+        <h2>Últimas</h2>
+        <ol class="aside-list">
+          {% for p in sidebar_posts %}
+          <li><a href="{{ p.url }}">{{ p.title }}</a><span>{{ p.date_br }}</span></li>
+          {% endfor %}
+        </ol>
+      </div>
+      {% endif %}
+      <div class="aside-block">
+        <h2>Programação</h2>
+        <ul class="aside-links">
+          {% for l in programacao_links[:7] %}
+          <li><a href="{{ l.url }}">{{ l.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="aside-block aside-block--note">
+        <h2>Anuncie</h2>
+        <p>Mídia kit e formatos para marcas que falam com quem ama cultura pop.</p>
+        <a class="section-head__link" href="/contato/">Falar com a redação</a>
+      </div>
+    </aside>
+  </div>
+</article>
+{% endblock %}
