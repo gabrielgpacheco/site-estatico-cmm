@@ -38,3 +38,5 @@ desktop.ini
 dados/
 __pycache__/
 *.pyc
+.wrangler/
+.dev.vars

@@ -36,8 +36,13 @@ jobs:
       - name: Build search index
         run: npx --yes pagefind@1.5.2 --site site
 
+      - name: Remove CNAME (dominio gerenciado pela Cloudflare)
+        run: rm -f site/CNAME
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
