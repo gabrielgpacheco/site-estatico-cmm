@@ -17,7 +17,7 @@ def main():
         "attachment": {str(k): v for k, v in payload["attachment_id_map"].items()},
     }
 
-    template = """const ORIGIN = "https://gabrielgpacheco.github.io";
+    template = """const ORIGIN = "https://gabrielgpacheco.github.io/site-estatico-cmm";
 const BASE = "https://www.cinemaemuitomais.com";
 const RULES = __RULES__;
 const POST_IDS = __POST_IDS__;
@@ -72,7 +72,7 @@ export default {
     if (rule === null && Object.prototype.hasOwnProperty.call(RULES, url.pathname)) return gone();
     if (typeof rule === "string") return redirect(target(rule, url.search));
 
-    const origin = new URL(url.pathname + url.search, ORIGIN);
+    const origin = new URL(ORIGIN + url.pathname + url.search);
     return fetch(origin, {
       method: request.method,
       headers: request.headers,

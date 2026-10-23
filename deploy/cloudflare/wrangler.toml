@@ -1,7 +1,7 @@
 name = "cmm-static-proxy"
 main = "worker.js"
 compatibility_date = "2026-10-22"
-workers_dev = true
+workers_dev = false
 
 routes = [
   { pattern = "www.cinemaemuitomais.com/*", zone_name = "cinemaemuitomais.com" },
