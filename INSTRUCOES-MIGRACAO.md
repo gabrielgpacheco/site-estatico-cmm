@@ -1,9 +1,9 @@
 # Instruções — Migração CMM (Cinema e Muito +) para site estático
 
 > **Arquivo de retomada.** Ler este documento antes de qualquer ação.
-> Última atualização: 2026-10-22
-> Status geral: **Fases 0–6 aprovadas; Fase 7 em andamento**.
-> Próxima fase: **Fase 7 — deploy, Cloudflare e corte**.
+> Última atualização: 2026-10-23
+> Status geral: **Fases 0–6 aprovadas; Fase 7 publicada para web e em validação final**.
+> Próxima etapa: **aprovação da Fase 7 e v2.0 (configuração de e-mail)**.
 
 ---
 
@@ -673,22 +673,22 @@ Notas da execução:
 **Objetivo:** colocar no ar e desligar o WordPress com segurança.
 
 Tarefas:
-- [ ] Criar repositório GitHub e workflow de deploy.
-- [ ] Publicar GitHub Pages.
-- [ ] Configurar domínio `www.cinemaemuitomais.com`.
-- [ ] Emitir certificado com DNS sem proxy.
-- [ ] Cloudflare:
+- [x] Criar repositório GitHub e workflow de deploy.
+- [x] Publicar GitHub Pages.
+- [x] Configurar domínio `www.cinemaemuitomais.com`.
+- [x] HTTPS na borda Cloudflare; GitHub Pages permanece como origem, sem domínio personalizado.
+- [x] Cloudflare:
   - apex → 301 para `www`;
   - `www` → GitHub Pages com proxy;
   - `media` → R2;
   - SSL Full (strict);
   - Always Use HTTPS;
-  - cache de HTML/uploads;
   - Worker/Bulk Redirects.
-- [ ] Testar HTTPS, apex/www, redirects, 404, imagens, AdSense e GA4.
+- [x] Testar HTTPS, apex/www, redirects, 404, imagens, AdSense e GA4.
 - [ ] Reenviar sitemap no GSC.
 - [ ] Monitorar 404/cobertura por 30 dias.
 - [ ] Só depois cancelar a hospedagem antiga.
+- [ ] Configurar e-mail na v2.0.
 
 Entregáveis:
 - site em produção
@@ -702,7 +702,35 @@ Critério de aprovação:
 - Redirects funcionando.
 - Autorização do usuário para cancelar a hospedagem.
 
-Status: **[ ] não iniciada**
+Status: **[ ] em andamento — web publicada; monitoramento e e-mail pendentes**
+
+### Execução em 2026-10-23
+
+- Relatório local: `dados/fase7-relatorio.md`.
+- Repositório: `https://github.com/gabrielgpacheco/site-estatico-cmm`. O repositório raiz `gabrielgpacheco.github.io` não foi usado.
+- GitHub Pages: `https://gabrielgpacheco.github.io/site-estatico-cmm/`, publicado pelo workflow `.github/workflows/pages.yml`. O `CNAME` é removido do artefato.
+- Cloudflare Worker `cmm-static-proxy`, rotas `www.cinemaemuitomais.com/*` e `cinemaemuitomais.com/*`; o Worker reescreve a origem para o caminho do Pages de projeto.
+- DNS:
+  - `www` → CNAME `gabrielgpacheco.github.io`, proxied;
+  - apex → quatro A do GitHub Pages, proxied;
+  - `media` preservado em R2;
+  - SSL Full (strict) e Always Use HTTPS já estavam ativos.
+- Snapshot do DNS anterior: `dados/fase7-dns-antes.json`.
+- Validação:
+  - 20.285 arquivos estáticos responderam 200 em produção, excluindo os arquivos com hash do Pagefind;
+  - 7.141 regras de redirect validadas (301/410);
+  - sitemaps com 19.647 URLs;
+  - busca Pagefind com 41 resultados para “tarantino”;
+  - consentimento bloqueia GA4 antes do aceite e libera GA4 depois;
+  - apex e HTTP redirecionam para `https://www.cinemaemuitomais.com/`;
+  - 404 customizado e mídia R2 operacionais.
+- Pendências:
+  - reenvio do sitemap no GSC;
+  - monitoramento de 404/cobertura por 30 dias;
+  - **e-mail: configuração adiada para a v2.0 por decisão do usuário**;
+  - não cancelar a hospedagem antiga enquanto o e-mail não for tratado;
+  - regra explícita de cache para HTML/uploads ainda não criada; o comportamento padrão da Cloudflare está ativo.
+- O workflow emite avisos de depreciação do Node.js 20 nas actions; não bloqueiam o deploy.
 
 ---
 
@@ -735,6 +763,14 @@ Status: **[ ] não iniciada**
 | AdSense/consentimento | Banner próprio + Consent Mode v2; manter políticas |
 | Segredos no backup | Nunca commitar dumps; rotacionar chaves após o corte |
 | Perda de SEO | URLs idênticas, canonicals do Yoast, sitemaps e redirects |
+| E-mail no cPanel | **Adiado para a v2.0**; não cancelar a hospedagem antiga antes de migrar MX, IMAP/SMTP, SPF/DKIM/DMARC e testar envio/recebimento |
+
+### Pendências para a v2.0
+
+- Configurar o e-mail do domínio; a decisão de 2026-10-23 foi ignorar o tema nesta entrega.
+- Não cancelar a hospedagem antiga enquanto o e-mail não estiver migrado ou desativado conscientemente.
+- Reenviar o sitemap no GSC e acompanhar cobertura/404 por 30 dias.
+- Avaliar regras explícitas de cache para HTML e uploads, se necessário.
 
 ---
 
