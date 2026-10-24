@@ -1,9 +1,9 @@
 # Instruções — Migração CMM (Cinema e Muito +) para site estático
 
 > **Arquivo de retomada.** Ler este documento antes de qualquer ação.
-> Última atualização: 2026-10-23
-> Status geral: **Fases 0–7 aprovadas; revisão de identidade visual em andamento**.
-> Próxima etapa: **aprovação visual do preview; depois v2.0 (configuração de e-mail)**.
+> Última atualização: 2026-10-24
+> Status geral: **Fases 0–7 aprovadas; identidade visual aprovada e publicada**.
+> Próxima etapa: **v2.0 (configuração de e-mail)**.
 
 ---
 
@@ -735,8 +735,8 @@ Aprovação do usuário: **aprovada em 2026-10-23**
 
 ### Revisão de identidade visual (pós-Fase 7)
 
-Status: **[ ] em andamento — preview local gerado; aguardando aprovação visual**
-Data: 2026-10-23
+Status: **[x] concluída e aprovada pelo usuário — publicada em produção**
+Data: 2026-10-23 (implementação) / 2026-10-24 (publicação)
 
 Entregue:
 - Originais preservados em `dados/identidade/` (PSD e PNG transparente); pasta ignorada pelo Git.
@@ -755,9 +755,12 @@ Validação:
 - Screenshots locais em 1440, 1280, 1024, 768 e 390 px; sem overflow no header.
 - Contraste: teal sobre branco 10,23:1; lima sobre grafite 7,53:1; lima sobre `#141414` 10,08:1.
 
-Pendente:
-- Aprovação visual do usuário.
-- Após aprovação: commit, push e deploy pelo GitHub Actions.
+Publicação:
+- Aprovação visual do usuário em 2026-10-24.
+- Commit `8f3dc55` (`Atualiza identidade visual do site`) enviado para `main`.
+- Workflow GitHub Actions `40056615848` concluído com sucesso.
+- Produção validada em `www.cinemaemuitomais.com`, apex e Pages direto: logo, tema, favicon e manifest novos, sem referências ao vermelho antigo.
+- Assets novos, CSS e Pagefind respondendo 200.
 
 ---
 
