@@ -2,8 +2,8 @@
 
 > **Arquivo de retomada.** Ler este documento antes de qualquer ação.
 > Última atualização: 2026-10-23
-> Status geral: **Fases 0–6 aprovadas; Fase 7 publicada para web e em validação final**.
-> Próxima etapa: **aprovação da Fase 7 e v2.0 (configuração de e-mail)**.
+> Status geral: **Fases 0–7 aprovadas; revisão de identidade visual em andamento**.
+> Próxima etapa: **aprovação visual do preview; depois v2.0 (configuração de e-mail)**.
 
 ---
 
@@ -702,7 +702,8 @@ Critério de aprovação:
 - Redirects funcionando.
 - Autorização do usuário para cancelar a hospedagem.
 
-Status: **[ ] em andamento — web publicada; monitoramento e e-mail pendentes**
+Status: **[x] concluída e aprovada pelo usuário — web publicada; monitoramento e e-mail pendentes**
+Aprovação do usuário: **aprovada em 2026-10-23**
 
 ### Execução em 2026-10-23
 
@@ -731,6 +732,32 @@ Status: **[ ] em andamento — web publicada; monitoramento e e-mail pendentes**
   - não cancelar a hospedagem antiga enquanto o e-mail não for tratado;
   - regra explícita de cache para HTML/uploads ainda não criada; o comportamento padrão da Cloudflare está ativo.
 - O workflow emite avisos de depreciação do Node.js 20 nas actions; não bloqueiam o deploy.
+
+### Revisão de identidade visual (pós-Fase 7)
+
+Status: **[ ] em andamento — preview local gerado; aguardando aprovação visual**
+Data: 2026-10-23
+
+Entregue:
+- Originais preservados em `dados/identidade/` (PSD e PNG transparente); pasta ignorada pelo Git.
+- Cores amostradas da marca: grafite `#2D2D2D`, teal `#00475B`, lima `#A3CE4B`.
+- Header e footer usando somente a logomarca, sem wordmark adicional; nome oficial “Cinema e Muito +” preservado em metadados, alt e rodapé.
+- Logo exportada em WebP e PNG (240 px) com disco grafite no CSS; header 80 px / mobile 64 px; footer 120 px / mobile 96 px.
+- Novo favicon SVG/ICO/PNG e ícones PWA 192, 512 e maskable, com símbolo simplificado.
+- Paleta aplicada em links, botões, navegação, Pagefind, seleção, foco, tags e rodapé; vermelho mantido apenas como cor semântica de perigo.
+- `theme-color` e manifest atualizados para `#00475B`.
+- Sem alterações em conteúdo, URLs, GA4, AdSense, consentimento ou schema.
+
+Validação:
+- Build completo: 20.257 HTML, 25.283 arquivos, 342,2 MB; Pagefind com 4.786 páginas.
+- Amostra de 250 HTML: 100% com a nova logo/favicon/tema; nenhuma referência ao vermelho antigo.
+- Todos os assets locais referenciados na amostra existem.
+- Screenshots locais em 1440, 1280, 1024, 768 e 390 px; sem overflow no header.
+- Contraste: teal sobre branco 10,23:1; lima sobre grafite 7,53:1; lima sobre `#141414` 10,08:1.
+
+Pendente:
+- Aprovação visual do usuário.
+- Após aprovação: commit, push e deploy pelo GitHub Actions.
 
 ---
 
