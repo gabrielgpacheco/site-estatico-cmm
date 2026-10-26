@@ -45,7 +45,6 @@
   --line: #dce3d1;
   --accent: #00475b;
   --accent-dark: #003542;
-  --brand-dark: #2d2d2d;
   --lime: #a3ce4b;
   --lime-soft: #eef6e1;
   --danger: #b3261e;
@@ -107,7 +106,7 @@ p { margin: 0 0 1em; }
 .brand { display: inline-flex; align-items: center; flex: 0 0 auto; }
 .brand__logo {
   display: block; width: 80px; height: 80px; object-fit: contain;
-  background: var(--brand-dark); border-radius: 50%;
+  background: transparent;
   transition: opacity 0.2s ease;
 }
 .brand:hover .brand__logo { opacity: 0.9; }
