@@ -736,7 +736,7 @@ Aprovação do usuário: **aprovada em 2026-10-23**
 ### Revisão de identidade visual (pós-Fase 7)
 
 Status: **[x] concluída e aprovada pelo usuário — publicada em produção**
-Data: 2026-10-23 (implementação) / 2026-10-24 (publicação)
+Data: 2026-10-23 (implementação) / 2026-10-24 (publicação) / 2026-10-26 (correção e cache)
 
 Entregue:
 - Originais preservados em `dados/identidade/` (PSD e PNG transparente); pasta ignorada pelo Git.
@@ -807,7 +807,24 @@ Publicação:
 
 ---
 
-## 11. Ao retomar no dia seguinte
+## 11. Estado em 2026-10-26 (encerramento)
+
+Concluído hoje:
+- Identidade visual publicada e logo corrigida sem o disco cinza; produção validada em desktop e 390 px.
+- CSS versionado em `main.css?v=3`; commits `66de688` e `d37b061`.
+- GSC: sitemap reenviado; índice e cinco sitemaps validados, total de 19.647 URLs.
+- Cloudflare: cache de HTML/dinâmicos desativado e cache longo de `/assets/` e `/pagefind/` ativado; purge geral aplicado e headers validados.
+- Documentação atualizada e enviada ao repositório.
+
+Pendente para a próxima sessão:
+- Acompanhar GSC: cobertura, páginas 404 e Core Web Vitals por 30 dias.
+- Configurar o e-mail na v2.0.
+- Não cancelar a hospedagem antiga antes de concluir a migração de e-mail.
+- Se o CSS mudar novamente, subir a versão da query (`?v=4`) e repetir o purge.
+
+---
+
+## 12. Ao retomar no dia seguinte
 
 1. Ler este arquivo inteiro.
 2. Verificar qual fase está marcada como “em andamento” ou “não iniciada”.
