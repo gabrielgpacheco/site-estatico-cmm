@@ -2,8 +2,8 @@
 
 > **Arquivo de retomada.** Ler este documento antes de qualquer ação.
 > Última atualização: 2026-10-24
-> Status geral: **Fases 0–7 aprovadas; identidade visual aprovada e publicada**.
-> Próxima etapa: **v2.0 (configuração de e-mail)**.
+> Status geral: **Fases 0–7 aprovadas; identidade visual concluída; GSC/Cloudflare em andamento**.
+> Próxima etapa: **concluir GSC e cache da Cloudflare; depois v2.0 (e-mail)**.
 
 ---
 
@@ -761,6 +761,9 @@ Publicação:
 - Workflow GitHub Actions `40056615848` concluído com sucesso.
 - Produção validada em `www.cinemaemuitomais.com`, apex e Pages direto: logo, tema, favicon e manifest novos, sem referências ao vermelho antigo.
 - Assets novos, CSS e Pagefind respondendo 200.
+- Correção pós-publicação em 2026-10-24: removido o disco cinza da logo (`background: transparent`), CSS versionado em `main.css?v=3`, commit `66de688` e workflow `40366718414` concluído com sucesso.
+- Produção revalidada após a correção, inclusive em 1440 e 390 px; sem `brand-dark` no CSS.
+- Pendente de cache Cloudflare: HTML e assets retornam `cf-cache-status: HIT` com `max-age=345600`; o cache level está `aggressive`. O token atual não tem permissão para Cache Rules nem Purge, então é necessário liberar essas permissões ou ajustar pelo dashboard.
 
 ---
 
