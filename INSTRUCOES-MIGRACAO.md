@@ -1,9 +1,9 @@
 # Instruções — Migração CMM (Cinema e Muito +) para site estático
 
 > **Arquivo de retomada.** Ler este documento antes de qualquer ação.
-> Última atualização: 2026-10-24
-> Status geral: **Fases 0–7 aprovadas; identidade visual concluída; GSC/Cloudflare em andamento**.
-> Próxima etapa: **concluir GSC e cache da Cloudflare; depois v2.0 (e-mail)**.
+> Última atualização: 2026-10-26
+> Status geral: **Fases 0–7 aprovadas; identidade visual, GSC e cache Cloudflare concluídos; monitoramento e e-mail pendentes**.
+> Próxima etapa: **v2.0 (configuração de e-mail) e monitoramento GSC/404 por 30 dias**.
 
 ---
 
@@ -685,7 +685,7 @@ Tarefas:
   - Always Use HTTPS;
   - Worker/Bulk Redirects.
 - [x] Testar HTTPS, apex/www, redirects, 404, imagens, AdSense e GA4.
-- [ ] Reenviar sitemap no GSC.
+- [x] Reenviar sitemap no GSC.
 - [ ] Monitorar 404/cobertura por 30 dias.
 - [ ] Só depois cancelar a hospedagem antiga.
 - [ ] Configurar e-mail na v2.0.
@@ -725,12 +725,12 @@ Aprovação do usuário: **aprovada em 2026-10-23**
   - consentimento bloqueia GA4 antes do aceite e libera GA4 depois;
   - apex e HTTP redirecionam para `https://www.cinemaemuitomais.com/`;
   - 404 customizado e mídia R2 operacionais.
+- GSC em 2026-10-26: sitemap reenviado pelo usuário; índice e cinco sitemaps validados no servidor, total de 19.647 URLs.
+- Cloudflare em 2026-10-26: substituída a regra “Cache everything” por bypass de HTML/dinâmicos e cache de 1 ano para `/assets/` e `/pagefind/`; purge geral aplicado. HTML, sitemap e robots retornam `cf-cache-status: DYNAMIC`; assets retornam `HIT`.
 - Pendências:
-  - reenvio do sitemap no GSC;
   - monitoramento de 404/cobertura por 30 dias;
   - **e-mail: configuração adiada para a v2.0 por decisão do usuário**;
-  - não cancelar a hospedagem antiga enquanto o e-mail não for tratado;
-  - regra explícita de cache para HTML/uploads ainda não criada; o comportamento padrão da Cloudflare está ativo.
+  - não cancelar a hospedagem antiga enquanto o e-mail não for tratado.
 - O workflow emite avisos de depreciação do Node.js 20 nas actions; não bloqueiam o deploy.
 
 ### Revisão de identidade visual (pós-Fase 7)
@@ -742,7 +742,7 @@ Entregue:
 - Originais preservados em `dados/identidade/` (PSD e PNG transparente); pasta ignorada pelo Git.
 - Cores amostradas da marca: grafite `#2D2D2D`, teal `#00475B`, lima `#A3CE4B`.
 - Header e footer usando somente a logomarca, sem wordmark adicional; nome oficial “Cinema e Muito +” preservado em metadados, alt e rodapé.
-- Logo exportada em WebP e PNG (240 px) com disco grafite no CSS; header 80 px / mobile 64 px; footer 120 px / mobile 96 px.
+- Logo exportada em WebP e PNG (240 px), com fundo transparente no CSS; header 80 px / mobile 64 px; footer 120 px / mobile 96 px.
 - Novo favicon SVG/ICO/PNG e ícones PWA 192, 512 e maskable, com símbolo simplificado.
 - Paleta aplicada em links, botões, navegação, Pagefind, seleção, foco, tags e rodapé; vermelho mantido apenas como cor semântica de perigo.
 - `theme-color` e manifest atualizados para `#00475B`.
@@ -763,7 +763,8 @@ Publicação:
 - Assets novos, CSS e Pagefind respondendo 200.
 - Correção pós-publicação em 2026-10-24: removido o disco cinza da logo (`background: transparent`), CSS versionado em `main.css?v=3`, commit `66de688` e workflow `40366718414` concluído com sucesso.
 - Produção revalidada após a correção, inclusive em 1440 e 390 px; sem `brand-dark` no CSS.
-- Pendente de cache Cloudflare: HTML e assets retornam `cf-cache-status: HIT` com `max-age=345600`; o cache level está `aggressive`. O token atual não tem permissão para Cache Rules nem Purge, então é necessário liberar essas permissões ou ajustar pelo dashboard.
+- Cache Cloudflare corrigido em 2026-10-26: removida a regra “Cache everything”; criadas “HTML e conteúdo dinâmico sem cache” e “Assets e Pagefind com cache longo”; purge geral aplicado.
+- Validação de cache: HTML, sitemap e robots em `DYNAMIC`; CSS, imagens e Pagefind em `HIT`. Assets mantêm `Cache-Control: max-age=345600` no navegador, com cache de borda configurado por 1 ano.
 
 ---
 
@@ -802,8 +803,7 @@ Publicação:
 
 - Configurar o e-mail do domínio; a decisão de 2026-10-23 foi ignorar o tema nesta entrega.
 - Não cancelar a hospedagem antiga enquanto o e-mail não estiver migrado ou desativado conscientemente.
-- Reenviar o sitemap no GSC e acompanhar cobertura/404 por 30 dias.
-- Avaliar regras explícitas de cache para HTML e uploads, se necessário.
+- Acompanhar cobertura/404 no GSC por 30 dias; sitemap já reenviado em 2026-10-26.
 
 ---
 
